@@ -29,22 +29,11 @@ class App extends React.Component {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
+        <p>{this.state.value}</p> 
         <Dropdown options={options}  
               onChange={this._onSelect}
               value={defaultOption} 
               placeholder="Select an option" />
-        
-
-        <p>{this.state.value}</p> 
-   
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn about Cubeassist
-        </a>
       </header>
     </div>
      
