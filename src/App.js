@@ -15,9 +15,10 @@ class App extends React.Component {
     super();
     this.state = {
       scramble: '',
-      cubeType: ''
+      cubeType: '',
+      time: "Eternity",
+      isInspecting : false
     };
-
   }
   _onSelect = (e) => {
     this.generate(e.value)
@@ -25,7 +26,15 @@ class App extends React.Component {
   _onRegenClick = (e) => {
     this.generate(this.state.cubeType)
   }
-
+  _onStartClick = (e) => {
+    this.setState(
+      {
+        isInspecting: (!this.state.isInspecting)
+      }
+    );
+    console.log(this.state.cubeType)
+    this.generate(this.state.cubeType)
+  }
   componentDidMount() {
     this.generate(options[0]);
   }
@@ -70,8 +79,16 @@ class App extends React.Component {
 
         <header className="App-header">
           <div onClick={this._onRegenClick}>
-            <p className='Scramble-txt'>{this.state.scramble}</p>
+            { this.state.isInspecting == false  && 
+                    <p className='Scramble-txt' >{this.state.scramble}</p>
+    
+            }
+            { this.state.isInspecting  &&
+              <p className='Scramble-txt'>{this.state.time}</p>
+            }
+         
           </div>
+          <button className="Start-button" onClick={this._onStartClick}>INSPECT</button>
           <Dropdown options={options}
             onChange={this._onSelect}
             value={defaultOption}
@@ -284,7 +301,13 @@ function getRandomExcluding(min, max, value) {
 // ========================================
 
 
+class TimerState {
+  constructor(){
+    this.cubeType = "3x3";
+    this.scramble = ""
+  }
 
+}
 
 
 export default App;
