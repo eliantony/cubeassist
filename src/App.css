@@ -24,6 +24,10 @@
   color: white;
 }
 
+.Scramble-txt {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 24pt;
+}
 .App-link {
   color: #61dafb;
 }
