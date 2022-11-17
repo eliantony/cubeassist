@@ -25,6 +25,7 @@
 }
 
 .Scramble-txt {
+  margin: 7pt;
   font-family: 'Courier New', Courier, monospace;
   font-size: 24pt;
 }

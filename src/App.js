@@ -70,7 +70,6 @@ class App extends React.Component {
 
         <header className="App-header">
           <div onClick={this._onRegenClick}>
-            <img src={logo} className="App-logo" alt="logo" />
             <p className='Scramble-txt'>{this.state.scramble}</p>
           </div>
           <Dropdown options={options}
@@ -213,7 +212,61 @@ function generate2x2() {
   return String(scrambleFinal);
 }
 function generateSkewb() {
-  return "genned Skewb scramble";
+  var scrambleFinal = ""
+  var face = 0
+  var faceChar = "0"
+  var prevFace = 0
+  let length = getRandomArbitrary(8, 10);
+  var faceAmt = 0
+  var faceAmtChar = "0"
+  for (let i = 0; i < length; i++) {
+    faceAmt = getRandomArbitrary(1, 2)
+    face = getRandomExcluding(1, 4, prevFace)
+    // console.log(n3x3_amt);
+    switch (faceAmt) {
+      case 1:
+        faceAmtChar = "'"
+        break;
+
+      case 2:
+        faceAmtChar = " "
+        break;
+
+      default:
+        faceAmtChar = "-"
+        break;
+    }
+    switch (face) {
+      case 1:
+        faceChar = "R"
+        break;
+
+      case 2:
+        faceChar = "U"
+        break;
+
+      case 3:
+        faceChar = "L"
+        break;
+
+      case 4:
+        faceChar = "B"
+        break;
+
+      default:
+        faceChar = "-"
+        break;
+    }
+
+    if (faceAmtChar == " ") {
+      scrambleFinal = scrambleFinal + String(faceChar) + " "
+    }
+    else {
+      scrambleFinal = scrambleFinal + String(faceChar) + String(faceAmtChar) + " "
+    }
+    prevFace = face
+  }
+  return String(scrambleFinal);
 }
 function getRandomArbitrary(min, max) {
   max = max + 1
