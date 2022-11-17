@@ -13,47 +13,50 @@ const defaultOption = options[0];
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       scramble: '',
-      cubeType: '' 
+      cubeType: ''
     };
-    
+
   }
-   _onSelect = (e) => {
+  _onSelect = (e) => {
     this.generate(e.value)
   };
+  _onRegenClick = (e) => {
+    this.generate(this.state.cubeType)
+  }
 
   componentDidMount() {
     this.generate(options[0]);
   }
-  
+
   generate(cubeType) {
     switch (cubeType) {
       case "3x3":
         this.setState(
           {
-            cubeType : "3x3",
+            cubeType: "3x3",
             scramble: generate3x3()
           }
         );
         break;
-        case "2x2":
+      case "2x2":
         this.setState(
           {
-            cubeType : "2x2",
+            cubeType: "2x2",
             scramble: generate2x2()
           }
         );
         break;
-        case "Skewb":
+      case "Skewb":
         this.setState(
           {
-            cubeType : "Skewb",
+            cubeType: "Skewb",
             scramble: generateSkewb()
           }
         );
         break;
-    
+
       default:
         break;
     }
@@ -64,30 +67,164 @@ class App extends React.Component {
     return (
 
       <div className="App">
-  
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
 
-        <p className='Scramble-txt'>{this.state.scramble}</p>
-        <Dropdown options={options}  
-              onChange={this._onSelect}
-              value={defaultOption} 
-              placeholder="Select an option" />
-      </header>
-    </div>
-     
+        <header className="App-header">
+          <div onClick={this._onRegenClick}>
+            <img src={logo} className="App-logo" alt="logo" />
+            <p className='Scramble-txt'>{this.state.scramble}</p>
+          </div>
+          <Dropdown options={options}
+            onChange={this._onSelect}
+            value={defaultOption}
+            placeholder="Select an option" />
+        </header>
+      </div>
+
     );
   }
 }
 
 function generate3x3() {
-  return "genned 3x3 scramble";
+  var scrambleFinal = ""
+  var face = 0
+  var faceChar = "0"
+  var prevFace = 0
+  let length = getRandomArbitrary(19, 21);
+  var faceAmt = 0
+  var faceAmtChar = "0"
+  for (let i = 0; i < length; i++) {
+    faceAmt = getRandomArbitrary(1, 4)
+    face = getRandomExcluding(1, 6, prevFace)
+    // console.log(n3x3_amt);
+    switch (faceAmt) {
+      case 1:
+        faceAmtChar = "'"
+        break;
+
+      case 2:
+      case 3:
+        faceAmtChar = "2"
+        break;
+
+      case 4:
+        faceAmtChar = " "
+        break;
+
+      default:
+        faceAmtChar = "-"
+        break;
+    }
+    switch (face) {
+      case 1:
+        faceChar = "R"
+        break;
+
+      case 2:
+        faceChar = "L"
+        break;
+
+      case 3:
+        faceChar = "U"
+        break;
+
+      case 4:
+        faceChar = "D"
+        break;
+
+      case 5:
+        faceChar = "F"
+        break;
+      case 6:
+        faceChar = "B"
+        break;
+
+      default:
+        faceChar = "-"
+        break;
+    }
+
+    if (faceAmtChar == " ") {
+      scrambleFinal = scrambleFinal + String(faceChar) + " "
+    }
+    else {
+      scrambleFinal = scrambleFinal + String(faceChar) + String(faceAmtChar) + " "
+    }
+    prevFace = face
+  }
+  return String(scrambleFinal);
 }
+
 function generate2x2() {
-  return "genned 2x2 scramble";
+  var scrambleFinal = ""
+  var face = 0
+  var faceChar = "0"
+  var prevFace = 0
+  let length = getRandomArbitrary(9, 11);
+  var faceAmt = 0
+  var faceAmtChar = "0"
+  for (let i = 0; i < length; i++) {
+    faceAmt = getRandomArbitrary(1, 4)
+    face = getRandomExcluding(1, 3, prevFace)
+    // console.log(n3x3_amt);
+    switch (faceAmt) {
+      case 1:
+        faceAmtChar = "'"
+        break;
+
+      case 2:
+      case 3:
+        faceAmtChar = "2"
+        break;
+
+      case 4:
+        faceAmtChar = " "
+        break;
+
+      default:
+        faceAmtChar = "-"
+        break;
+    }
+    switch (face) {
+      case 1:
+        faceChar = "R"
+        break;
+
+      case 2:
+        faceChar = "F"
+        break;
+
+      case 3:
+        faceChar = "U"
+        break;
+
+      default:
+        faceChar = "-"
+        break;
+    }
+
+    if (faceAmtChar == " ") {
+      scrambleFinal = scrambleFinal + String(faceChar) + " "
+    }
+    else {
+      scrambleFinal = scrambleFinal + String(faceChar) + String(faceAmtChar) + " "
+    }
+    prevFace = face
+  }
+  return String(scrambleFinal);
 }
 function generateSkewb() {
   return "genned Skewb scramble";
+}
+function getRandomArbitrary(min, max) {
+  max = max + 1
+  return Math.floor(Math.random() * (max - min) + min);
+}
+function getRandomExcluding(min, max, value) {
+  do {
+    var rand = getRandomArbitrary(min, max);
+    if (rand != value)
+      return rand;
+  } while (true);
 }
 
 
