@@ -79,7 +79,6 @@ class App extends React.Component {
         ></CountDown>
       </div>
     )
-
   }
 
   render() {
@@ -172,6 +171,7 @@ function generate3x3() {
       case 5:
         faceChar = "F"
         break;
+
       case 6:
         faceChar = "B"
         break;

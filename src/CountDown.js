@@ -25,14 +25,14 @@ export default class CountDown extends React.Component {
         }
     }
 
-    fmtMSS(s) { return s + "s" }
+    fmtMSS(s) { return s }
 
 
     render() {
         let { count } = this.state;
         return (
             <p class="Time">{this.fmtMSS(count)}</p>
-                
         )
     }
 }
+
