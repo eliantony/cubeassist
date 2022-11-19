@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import CountDown from './CountDown'
 
 const options = [
   '3x3', '2x2', 'Skewb'
 ];
 const defaultOption = options[0];
-
 
 class App extends React.Component {
   constructor() {
@@ -16,8 +16,8 @@ class App extends React.Component {
     this.state = {
       scramble: '',
       cubeType: '',
-      time: "Eternity",
-      isInspecting : false
+      time: "",
+      isInspecting: false
     };
   }
   _onSelect = (e) => {
@@ -27,11 +27,7 @@ class App extends React.Component {
     this.generate(this.state.cubeType)
   }
   _onStartClick = (e) => {
-    this.setState(
-      {
-        isInspecting: (!this.state.isInspecting)
-      }
-    );
+    this.state.isInspecting = !this.state.isInspecting
     console.log(this.state.cubeType)
     this.generate(this.state.cubeType)
   }
@@ -69,36 +65,62 @@ class App extends React.Component {
       default:
         break;
     }
-    this.setState({ value: "Random scramble" });
+  }
+
+  CountDownMake() {
+    var onTimesup = () => {
+      this.setState({ isInspecting: false });
+    }
+    return (
+      <div>
+        <CountDown
+          onTimesup={onTimesup}
+          duration={15}
+        ></CountDown>
+      </div>
+    )
+
   }
 
   render() {
     return (
-
       <div className="App">
 
         <header className="App-header">
-          <div onClick={this._onRegenClick}>
-            { this.state.isInspecting == false  && 
-                    <p className='Scramble-txt' >{this.state.scramble}</p>
-    
+          <div onClick={this._onStartClick}>
+            {this.state.isInspecting == false &&
+              <p className='Scramble-txt' >{this.state.scramble}</p>
             }
-            { this.state.isInspecting  &&
-              <p className='Scramble-txt'>{this.state.time}</p>
-            }
-         
+            {this.state.isInspecting && this.CountDownMake()}
           </div>
-          <button className="Start-button" onClick={this._onStartClick}>INSPECT</button>
-          <Dropdown options={options}
-            onChange={this._onSelect}
-            value={defaultOption}
-            placeholder="Select an option" />
+          <div>
+            {!this.state.isInspecting &&
+              <div>
+                <div>
+                  <button className="Start-button" onClick={this._onRegenClick}>Generate</button>
+                </div>
+                <Dropdown options={options}
+                  onChange={this._onSelect}
+                  value={defaultOption}
+                  placeholder="Select an option" />
+
+              </div>
+            }
+            {this.state.isInspecting &&
+              <div>
+                <button className="Cancel-button" onClick={this._onStartClick}>Cancel</button>
+              </div>
+            }
+          </div>
+
         </header>
       </div>
 
     );
   }
 }
+
+
 
 function generate3x3() {
   var scrambleFinal = ""
@@ -302,7 +324,7 @@ function getRandomExcluding(min, max, value) {
 
 
 class TimerState {
-  constructor(){
+  constructor() {
     this.cubeType = "3x3";
     this.scramble = ""
   }
