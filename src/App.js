@@ -4,6 +4,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CountDown from './CountDown'
 import PlayNotification from './PlayNotification';
+import ToggleSwitch from "./ToggleSwitch";
 import './App.css';
 const options = [
   '3x3', '2x2', 'Skewb'
@@ -122,17 +123,20 @@ class App extends React.Component {
         }
         {this.state.isSecondWarning &&
           <PlayNotification
-          sound="cubeassist/audio/second-beep.wav"></PlayNotification>
+            sound="cubeassist/audio/second-beep.wav"></PlayNotification>
         }
-        <header className="App-header">          
+        <header className="App-header">
           <div>
-            {this.state.isInspecting ==false  && 
-            <Dropdown className='cubetype-dropdown'
-              options={options}
-              onChange={this._onSelect}
-              value={defaultOption}
-              placeholder="Select an option" 
-              />
+            {this.state.isInspecting == false &&
+              <div className='Rows'>
+                <Dropdown className='cubetype-dropdown'
+                  options={options}
+                  onChange={this._onSelect}
+                  value={defaultOption}
+                  placeholder="Select an option"
+                />
+                <ToggleSwitch label="Sound" />
+              </div>
             }
           </div>
 

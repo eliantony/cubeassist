@@ -41,6 +41,40 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App-link {
+  color: #61dafb;
+}
+
+
+.Rows
+{
+  display: flex;
+  width: 90vw;
+  margin-left: 10px;
+}
+.Sound-toggle
+{
+  font-size: 14pt;
+  font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+  color: #ffffff;
+  height: 45px;
+  width: 80px;
+  margin: auto;
+  border: 0px solid black;
+  border-radius: 40px;
+}
+.Sound-toggle.on
+{
+  background-color: #D9802F;
+  border: 0px solid black;
+
+}
+.Sound-toggle.off
+{
+  background-color: #373d48;
+  border: 0px solid black;
+}
+
 .main-box{
   margin-top:50px;
 }
@@ -49,9 +83,6 @@
   padding: 0px 50px 0px 50px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 24pt;
-}
-.App-link {
-  color: #61dafb;
 }
 
 
@@ -65,7 +96,6 @@
   border: 0px solid red;
   width: 100%;
 } 
-
 
 .Generate-button {
   font-size: 14pt;
