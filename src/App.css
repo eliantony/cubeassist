@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -14,9 +15,10 @@
 }
 
 .Time {
+  margin-top:100px;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 50pt;
+  font-size: 10em;
   margin: 0px;
 }
 .App-header {
@@ -29,31 +31,61 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.main-box{
+  margin-top:100px;
+}
 
 .Scramble-txt {
-  margin: 7pt;
+  padding: 0px 50px 0px 50px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 24pt;
 }
 .App-link {
   color: #61dafb;
 }
-.Start-button {
-  font-size: 16pt;
+
+.Generate-button {
+  font-size: 14pt;
   font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
-  background-color: #303642;
+  background-color: #3d4553;
   color: #ffffff;
-  margin: 20px;
-  padding: 15px;
-  border-width: 0px;
+  width: 100%;
+  height: 200px;
+  border: 0;
+
 }
-.Cancel-button {
-  font-size: 16pt;
+
+.bottom
+{
+  margin-top: auto;
+  }
+
+.button-container
+{
+  border: 0px solid red;
+  width: 100%;
+} 
+
+.Start-button {
+  font-size: 26pt;
   font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
-  background-color: #303642;
-  color: #c30909;
-  margin: 20px;
+  background-color: #016223;
+  color: #ffffff;
   padding: 15px;
+  width: 100%;
+  height: 300px;
+  border-width: 0px;
+
+}
+
+.Cancel-button {
+  font-size: 26pt;
+  font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+  background-color: #3d4553;
+  color: #f30000;
+  padding: 15px;
+  width: 100%;
+  height: 300px;
   border-width: 0px;
 }
 

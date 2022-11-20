@@ -86,33 +86,52 @@ class App extends React.Component {
       <div className="App">
 
         <header className="App-header">
-          <div onClick={this._onStartClick}>
-            {this.state.isInspecting == false &&
-              <p className='Scramble-txt' >{this.state.scramble}</p>
-            }
-            {this.state.isInspecting && this.CountDownMake()}
-          </div>
           <div>
-            {!this.state.isInspecting &&
-              <div>
-                <div>
-                  <button className="Start-button" onClick={this._onRegenClick}>Generate</button>
-                </div>
-                <Dropdown options={options}
+            <Dropdown options={options}
                   onChange={this._onSelect}
                   value={defaultOption}
                   placeholder="Select an option" />
-
-              </div>
-            }
-            {this.state.isInspecting &&
-              <div>
-                <button className="Cancel-button" onClick={this._onStartClick}>Cancel</button>
-              </div>
-            }
           </div>
 
+          
+          <div className='main-box'>
+            {this.state.isInspecting == false &&
+              <p className='Scramble-txt' >{this.state.scramble}</p>
+            }
+            {this.state.isInspecting 
+              && this.CountDownMake()}
+          </div>
+          <div className='bottom'>
+            
+          </div>
+
+         
+            {!this.state.isInspecting &&
+             <div className='button-container'>
+                <button className="Generate-button" 
+                onClick={this._onRegenClick}>GENERATE</button>
+
+                <div className="button-container">
+                          <button className="Start-button" 
+                            onClick={this._onStartClick}>START</button>
+                </div>
+
+            </div>
+
+
+            }
+
+            {this.state.isInspecting &&
+              <div className='button-container'>
+                <button className="Cancel-button" 
+                onClick={this._onStartClick}>CANCEL</button>
+              </div>
+            }              
+         
+
+
         </header>
+
       </div>
 
     );
