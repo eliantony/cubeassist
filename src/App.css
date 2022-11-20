@@ -21,6 +21,14 @@
   font-size:5em;
   margin-top:100px;
 }
+
+.timer-second-unit {
+  font-size: 3.5em;
+  padding-left:8px;
+  color: #808080;
+  font-style:normal;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -32,7 +32,8 @@ export default class CountDown extends React.Component {
         let { count } = this.state;
         return (
             <div>
-                <p class="Time">{this.fmtMSS(count)}</p>
+                <span class="Time">{this.fmtMSS(count)}</span>
+                <span className='timer-second-unit'>s</span>
             </div>
         )
     }
