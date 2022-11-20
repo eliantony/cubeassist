@@ -3,12 +3,15 @@ import React from 'react';
 export default class PlayNotification extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            sound: props.sound
+        }
     }
 
     componentDidMount() {
-        this.audio = new Audio('cubeassist/audio/beep.wav')
-        this.audio.load()
-        this.playAudio()
+        this.audio = new Audio(this.state.sound);
+        this.audio.load();
+        this.playAudio();
     }
 
     playAudio() {

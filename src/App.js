@@ -59,7 +59,6 @@ class App extends React.Component {
         }
       );
     }
-    console.log(e)
   }
 
   componentDidMount() {
@@ -118,19 +117,23 @@ class App extends React.Component {
     return (
       <div className="App">
         {this.state.isFirstWarning &&
-          <PlayNotification></PlayNotification>
+          <PlayNotification
+            sound="cubeassist/audio/first-beep.wav"></PlayNotification>
         }
         {this.state.isSecondWarning &&
-          <PlayNotification></PlayNotification>
+          <PlayNotification
+          sound="cubeassist/audio/second-beep.wav"></PlayNotification>
         }
         <header className="App-header">          
           <div>
+            {this.state.isInspecting ==false  && 
             <Dropdown className='cubetype-dropdown'
               options={options}
               onChange={this._onSelect}
               value={defaultOption}
               placeholder="Select an option" 
               />
+            }
           </div>
 
           <div className='main-box'>
@@ -190,7 +193,6 @@ function generate3x3() {
   for (let i = 0; i < length; i++) {
     faceAmt = getRandomArbitrary(1, 4)
     face = getRandomExcluding(1, 6, prevFace)
-    // console.log(n3x3_amt);
     switch (faceAmt) {
       case 1:
         faceAmtChar = "'"
@@ -261,7 +263,6 @@ function generate2x2() {
   for (let i = 0; i < length; i++) {
     faceAmt = getRandomArbitrary(1, 4)
     face = getRandomExcluding(1, 3, prevFace)
-    // console.log(n3x3_amt);
     switch (faceAmt) {
       case 1:
         faceAmtChar = "'"
@@ -319,7 +320,7 @@ function generateSkewb() {
   for (let i = 0; i < length; i++) {
     faceAmt = getRandomArbitrary(1, 2)
     face = getRandomExcluding(1, 4, prevFace)
-    // console.log(n3x3_amt);
+
     switch (faceAmt) {
       case 1:
         faceAmtChar = "'"
