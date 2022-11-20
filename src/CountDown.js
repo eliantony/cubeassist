@@ -5,6 +5,8 @@ export default class CountDown extends React.Component {
         super(props);
         this.state = {
             count: props.duration ? props.duration : 5,
+            onTick : props.onTick
+
         }
     }
     componentDidMount() {
@@ -25,7 +27,10 @@ export default class CountDown extends React.Component {
         }
     }
 
-    fmtMSS(s) { return s }
+    fmtMSS(s) { 
+        this.props.onTick(s);
+        return s;
+     }
 
 
     render() {

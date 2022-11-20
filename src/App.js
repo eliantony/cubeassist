@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CountDown from './CountDown'
+import PlayNotification from './PlayNotification';
 import './App.css';
 const options = [
   '3x3', '2x2', 'Skewb'
@@ -16,7 +17,10 @@ class App extends React.Component {
       scramble: '',
       cubeType: '',
       time: "",
-      isInspecting: false
+      isInspecting: false,
+      isFirstWarning: false,
+      isSecondWarning: false
+
     };
   }
   _onSelect = (e) => {
@@ -26,10 +30,38 @@ class App extends React.Component {
     this.generate(this.state.cubeType)
   }
   _onStartClick = (e) => {
-    this.state.isInspecting = !this.state.isInspecting
-    console.log(this.state.cubeType)
+    this.setState({
+      isInspecting: true
+    })
+  }
+
+  _onCancelClick = (e) => {
+    this.setState({
+      isInspecting: false,
+      isFirstWarning: false,
+      isSecondWarning: false
+    })
     this.generate(this.state.cubeType)
   }
+
+  _onTick = (e) => {
+    if (this.state.isFirstWarning == false && e <= 7) {
+      this.setState(
+        {
+          isFirstWarning: true
+        }
+      );
+    }
+    if (this.state.isSecondWarning == false && e <= 3) {
+      this.setState(
+        {
+          isSecondWarning: true
+        }
+      );
+    }
+    console.log(e)
+  }
+
   componentDidMount() {
     this.generate(options[0]);
   }
@@ -67,15 +99,17 @@ class App extends React.Component {
   }
 
   CountDownMake() {
-    var onTimesup = () => {
-      this.setState({ isInspecting: false });
+    let onTimesup = () => {
+      this._onCancelClick();
     }
     return (
       <div>
         <CountDown
           onTimesup={onTimesup}
           duration={15}
+          onTick={this._onTick}
         ></CountDown>
+
       </div>
     )
   }
@@ -83,50 +117,56 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-
-        <header className="App-header">
+        {this.state.isFirstWarning &&
+          <PlayNotification></PlayNotification>
+        }
+        {this.state.isSecondWarning &&
+          <PlayNotification></PlayNotification>
+        }
+        <header className="App-header">          
           <div>
-            <Dropdown className='cubetype-dropdown' options={options}
-                  onChange={this._onSelect}
-                  value={defaultOption}
-                  placeholder="Select an option" />
+            <Dropdown className='cubetype-dropdown'
+              options={options}
+              onChange={this._onSelect}
+              value={defaultOption}
+              placeholder="Select an option" 
+              />
           </div>
 
-          
           <div className='main-box'>
             {this.state.isInspecting == false &&
               <p className='Scramble-txt' >{this.state.scramble}</p>
             }
-            {this.state.isInspecting 
+            {this.state.isInspecting
               && this.CountDownMake()}
           </div>
           <div className='bottom'>
-            
+
           </div>
 
-         
-            {!this.state.isInspecting &&
-             <div className='button-container'>
-                <button className="Generate-button" 
+
+          {!this.state.isInspecting &&
+            <div className='button-container'>
+              <button className="Generate-button"
                 onClick={this._onRegenClick}>GENERATE</button>
 
-                <div className="button-container">
-                          <button className="Start-button" 
-                            onClick={this._onStartClick}>START</button>
-                </div>
+              <div className="button-container">
+                <button className="Start-button"
+                  onClick={this._onStartClick}>START</button>
+              </div>
 
             </div>
 
 
-            }
+          }
 
-            {this.state.isInspecting &&
-              <div className='button-container'>
-                <button className="Cancel-button" 
-                onClick={this._onStartClick}>CANCEL</button>
-              </div>
-            }              
-         
+          {this.state.isInspecting &&
+            <div className='button-container'>
+              <button className="Cancel-button"
+                onClick={this._onCancelClick}>CANCEL</button>
+            </div>
+          }
+
 
 
         </header>
@@ -339,15 +379,5 @@ function getRandomExcluding(min, max, value) {
 
 
 // ========================================
-
-
-class TimerState {
-  constructor() {
-    this.cubeType = "3x3";
-    this.scramble = ""
-  }
-
-}
-
 
 export default App;
