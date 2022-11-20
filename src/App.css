@@ -18,8 +18,8 @@
   margin-top:100px;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10em;
-  margin: 0px;
+  font-size:5em;
+  margin-top:100px;
 }
 .App-header {
   background-color: #282c34;
@@ -60,41 +60,84 @@
 .Generate-button {
   font-size: 14pt;
   font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
-  background-color: #3d4553;
+  background-color: #D9802F;
   color: #ffffff;
   height: 100px;
-  width: 85%;
+  border-radius:40px;
+  width: 95%;
   border-width: 0px;
-  margin:20px;
-  border-radius:10px;
-
+  margin:20px 10px 10px 10px;
 }
 
 .Start-button {
   font-size: 20pt;
   font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
-  background-color: #0062a9;
+  background-color: #3D5D88;
   color: #ffffff;
   height: 250px;
-  width: 85%;
+  border-radius:40px;
+  width: 95%;
   border-width: 0px;
-  margin:0px 20px 20px 20px;
-  border-radius:10px;
-
+  margin:5px 10px 20px 10px;
 }
 
 .Cancel-button {
   font-size: 20pt;
   font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
-  background-color: #3d4553;
-  color: #f30000;
+  background-color: #DE4442;
+  color: #ffffff;
   padding: 15px;
   height: 250px;
-  width: 85%;
+  border-radius:40px;
+  width: 95%;
   border-width: 0px;
-  margin:0px 20px 20px 20px;
-  border-radius:10px;
+  margin:5px 10px 20px 10px;
 }
+
+.Dropdown-root{
+  margin: 10px;
+  width: 90vw;
+ 
+  color: #ffffff;
+}
+
+.Dropdown-control {
+  border-radius: 10px;
+  border-width: 0;
+  background-color: #6E8B81;
+  color: #ffffff;
+}
+
+.Dropdown-placeholder {
+  background-color: #6E8B81;
+}
+
+.Dropdown-option {
+  background-color: #373d48;
+  color: #ffffff;
+  border-width: 0;
+}
+
+.Dropdown-menu {
+  border: 0px;
+  border-radius: 10px;
+}
+
+
+.Dropdown-option:hover {
+  background-color: #dca901;
+  color: #ffffff;
+}
+
+.Dropdown-option.is-selected{
+  background-color: #5b6578;
+  color: #ffffff;
+}
+
+.Dropdown-placeholder.is-selected {
+  padding-left:40px;
+}
+
 
 
 @keyframes App-logo-spin {

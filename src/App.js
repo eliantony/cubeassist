@@ -1,10 +1,9 @@
 import logo from './logo.svg';
 import React, { Component } from 'react';
-import './App.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CountDown from './CountDown'
-
+import './App.css';
 const options = [
   '3x3', '2x2', 'Skewb'
 ];
@@ -87,7 +86,7 @@ class App extends React.Component {
 
         <header className="App-header">
           <div>
-            <Dropdown options={options}
+            <Dropdown className='cubetype-dropdown' options={options}
                   onChange={this._onSelect}
                   value={defaultOption}
                   placeholder="Select an option" />
