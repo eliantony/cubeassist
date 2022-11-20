@@ -20,7 +20,9 @@ class App extends React.Component {
       isInspecting: false,
       isFirstWarning: false,
       isSecondWarning: false,
-      soundOn: false
+      soundOn: false,
+      firstBeepAudio: null,
+      secondBeepAudio: null
 
     };
   }
@@ -34,6 +36,7 @@ class App extends React.Component {
     this.setState({
       isInspecting: true
     })
+
   }
 
   _onCancelClick = (e) => {
@@ -46,14 +49,20 @@ class App extends React.Component {
   }
 
   _onTick = (e) => {
-    if (this.state.isFirstWarning === false && e <= 7) {
+    if (!this.state.soundOn){
+      return;
+    }
+    if (this.state.isFirstWarning === false && e <= 12) {
+      // console.log(this.state.firstBeepAudio);
+      this.state.firstBeepAudio.play();
       this.setState(
         {
-          isFirstWarning: true
+          isFirstWarning: true,
         }
       );
     }
-    if (this.state.isSecondWarning === false && e <= 3) {
+    if (this.state.isSecondWarning === false && e <= 9) {
+      this.state.secondBeepAudio.play();
       this.setState(
         {
           isSecondWarning: true
@@ -65,7 +74,7 @@ class App extends React.Component {
   _onSoundToggle = (e) => {
     this.setState(
       {
-        soundOn : e.value
+        soundOn: e.value
       }
     );
   }
@@ -117,21 +126,48 @@ class App extends React.Component {
           duration={15}
           onTick={this._onTick}
         ></CountDown>
-
       </div>
     )
+  }
+
+
+
+  _audioMounted = (e) => {
+    console.log('Audio context received' + e.audioElement);
+    if (e.id === "first-beep")
+    {
+      this.setState({
+        firstBeepAudio: e.audioElement
+      })
+    }
+    if (e.id === "second-beep")
+    {
+      this.setState({
+        secondBeepAudio: e.audioElement
+      })
+    }
+    
   }
 
   render() {
     return (
       <div className="App">
-        {(this.state.soundOn && this.state.isFirstWarning) &&
-          <PlayNotification
-            sound="audio/first-beep.wav"></PlayNotification>
-        }
-        {(this.state.soundOn && this.state.isSecondWarning) &&
-          <PlayNotification
-            sound="audio/second-beep.wav"></PlayNotification>
+
+        {this.state.soundOn &&
+          <div>
+
+            <PlayNotification
+              sound="audio/first-beep.wav"
+              id="first-beep"
+              onMount={this._audioMounted}>
+            </PlayNotification>
+            <PlayNotification
+              sound="audio/second-beep.wav"
+              id="second-beep"
+              onMount={this._audioMounted}>
+            </PlayNotification>
+          </div>
+
         }
         <header className="App-header">
           <div>
@@ -143,10 +179,10 @@ class App extends React.Component {
                   value={defaultOption}
                   placeholder="Select an option"
                 />
-                <ToggleSwitch 
+                <ToggleSwitch
                   label="Sound"
                   isOn={this.state.soundOn}
-                  onChange={this._onSoundToggle}/>
+                  onChange={this._onSoundToggle} />
               </div>
             }
           </div>
