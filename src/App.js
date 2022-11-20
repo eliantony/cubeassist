@@ -53,7 +53,6 @@ class App extends React.Component {
       return;
     }
     if (this.state.isFirstWarning === false && e <= 12) {
-      // console.log(this.state.firstBeepAudio);
       this.state.firstBeepAudio.play();
       this.setState(
         {
@@ -133,7 +132,6 @@ class App extends React.Component {
 
 
   _audioMounted = (e) => {
-    console.log('Audio context received' + e.audioElement);
     if (e.id === "first-beep")
     {
       this.setState({
@@ -428,8 +426,5 @@ function getRandomExcluding(min, max, value) {
       return rand;
   } while (true);
 }
-
-
-// ========================================
 
 export default App;

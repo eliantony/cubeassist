@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./ToggleSwitch.css";
 
 // Refer : https://www.geeksforgeeks.org/how-to-create-a-toggle-switch-in-react-as-a-reusable-component/ 
