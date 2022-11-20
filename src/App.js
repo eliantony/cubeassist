@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import React, { Component } from 'react';
+import React from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import CountDown from './CountDown'
@@ -20,7 +19,8 @@ class App extends React.Component {
       time: "",
       isInspecting: false,
       isFirstWarning: false,
-      isSecondWarning: false
+      isSecondWarning: false,
+      soundOn: false
 
     };
   }
@@ -46,20 +46,28 @@ class App extends React.Component {
   }
 
   _onTick = (e) => {
-    if (this.state.isFirstWarning == false && e <= 7) {
+    if (this.state.isFirstWarning === false && e <= 7) {
       this.setState(
         {
           isFirstWarning: true
         }
       );
     }
-    if (this.state.isSecondWarning == false && e <= 3) {
+    if (this.state.isSecondWarning === false && e <= 3) {
       this.setState(
         {
           isSecondWarning: true
         }
       );
     }
+  }
+
+  _onSoundToggle = (e) => {
+    this.setState(
+      {
+        soundOn : e.value
+      }
+    );
   }
 
   componentDidMount() {
@@ -117,17 +125,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {this.state.isFirstWarning &&
+        {(this.state.soundOn && this.state.isFirstWarning) &&
           <PlayNotification
-            sound="cubeassist/audio/first-beep.wav"></PlayNotification>
+            sound="audio/first-beep.wav"></PlayNotification>
         }
-        {this.state.isSecondWarning &&
+        {(this.state.soundOn && this.state.isSecondWarning) &&
           <PlayNotification
-            sound="cubeassist/audio/second-beep.wav"></PlayNotification>
+            sound="audio/second-beep.wav"></PlayNotification>
         }
         <header className="App-header">
           <div>
-            {this.state.isInspecting == false &&
+            {this.state.isInspecting === false &&
               <div className='Rows'>
                 <Dropdown className='cubetype-dropdown'
                   options={options}
@@ -135,13 +143,16 @@ class App extends React.Component {
                   value={defaultOption}
                   placeholder="Select an option"
                 />
-                <ToggleSwitch label="Sound" />
+                <ToggleSwitch 
+                  label="Sound"
+                  isOn={this.state.soundOn}
+                  onChange={this._onSoundToggle}/>
               </div>
             }
           </div>
 
           <div className='main-box'>
-            {this.state.isInspecting == false &&
+            {this.state.isInspecting === false &&
               <p className='Scramble-txt' >{this.state.scramble}</p>
             }
             {this.state.isInspecting
@@ -245,7 +256,7 @@ function generate3x3() {
         break;
     }
 
-    if (faceAmtChar == " ") {
+    if (faceAmtChar === " ") {
       scrambleFinal = scrambleFinal + String(faceChar) + " "
     }
     else {
@@ -303,7 +314,7 @@ function generate2x2() {
         break;
     }
 
-    if (faceAmtChar == " ") {
+    if (faceAmtChar === " ") {
       scrambleFinal = scrambleFinal + String(faceChar) + " "
     }
     else {
@@ -360,7 +371,7 @@ function generateSkewb() {
         break;
     }
 
-    if (faceAmtChar == " ") {
+    if (faceAmtChar === " ") {
       scrambleFinal = scrambleFinal + String(faceChar) + " "
     }
     else {
@@ -377,7 +388,7 @@ function getRandomArbitrary(min, max) {
 function getRandomExcluding(min, max, value) {
   do {
     var rand = getRandomArbitrary(min, max);
-    if (rand != value)
+    if (rand !== value)
       return rand;
   } while (true);
 }
