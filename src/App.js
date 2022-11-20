@@ -52,7 +52,7 @@ class App extends React.Component {
     if (!this.state.soundOn){
       return;
     }
-    if (this.state.isFirstWarning === false && e <= 12) {
+    if (this.state.isFirstWarning === false && e <= 7) {
       this.state.firstBeepAudio.play();
       this.setState(
         {
@@ -60,7 +60,7 @@ class App extends React.Component {
         }
       );
     }
-    if (this.state.isSecondWarning === false && e <= 9) {
+    if (this.state.isSecondWarning === false && e <= 3) {
       this.state.secondBeepAudio.play();
       this.setState(
         {
