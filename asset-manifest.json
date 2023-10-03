@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/cubeassist/static/css/main.cc09a3b1.css",
-    "main.js": "/cubeassist/static/js/main.df350983.js",
+    "main.css": "/cubeassist/static/css/main.0fa74250.css",
+    "main.js": "/cubeassist/static/js/main.ea9caa79.js",
     "static/js/787.c32903fe.chunk.js": "/cubeassist/static/js/787.c32903fe.chunk.js",
     "index.html": "/cubeassist/index.html",
-    "main.cc09a3b1.css.map": "/cubeassist/static/css/main.cc09a3b1.css.map",
-    "main.df350983.js.map": "/cubeassist/static/js/main.df350983.js.map",
+    "main.0fa74250.css.map": "/cubeassist/static/css/main.0fa74250.css.map",
+    "main.ea9caa79.js.map": "/cubeassist/static/js/main.ea9caa79.js.map",
     "787.c32903fe.chunk.js.map": "/cubeassist/static/js/787.c32903fe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cc09a3b1.css",
-    "static/js/main.df350983.js"
+    "static/css/main.0fa74250.css",
+    "static/js/main.ea9caa79.js"
   ]
 }
